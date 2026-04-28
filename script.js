@@ -3,12 +3,14 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, where, Ti
 
 // Configuração do Firebase (SUBSTITUA PELOS DADOS DO SEU PROJETO)
 const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_PROJETO.firebaseapp.com",
-    projectId: "SEU_PROJETO",
-    storageBucket: "SEU_PROJETO.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef"
+  apiKey: "AIzaSyB0sNCqeITOja_2WmtJi-exUMRMtdVdgQk",
+  authDomain: "mycommunityforum-3912a.firebaseapp.com",
+  databaseURL: "https://mycommunityforum-3912a-default-rtdb.firebaseio.com",
+  projectId: "mycommunityforum-3912a",
+  storageBucket: "mycommunityforum-3912a.firebasestorage.app",
+  messagingSenderId: "815011709524",
+  appId: "1:815011709524:web:93aed4d972d2ad90a5a3c1",
+  measurementId: "G-9FRFQW00WT"
 };
 
 const app = initializeApp(firebaseConfig);
