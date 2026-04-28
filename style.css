@@ -1,0 +1,15 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial; background: #075e54; }
+.app-container { max-width: 600px; margin: auto; background: #e5ddd5; height: 100vh; display: flex; flex-direction: column; }
+.chat-area { flex: 1; overflow-y: auto; padding: 10px; }
+.balao { display: flex; gap: 8px; margin-bottom: 12px; align-items: flex-start; }
+.balao.eu { flex-direction: row-reverse; }
+.avatar { width: 40px; height: 40px; background: #128c7e; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+.conteudo { max-width: 70%; }
+.nome-usuario { font-size: 12px; font-weight: bold; color: #075e54; }
+.texto { background: white; padding: 8px 12px; border-radius: 18px; }
+.balao.eu .texto { background: #dcf8c6; }
+.footer-input { background: #f0f0f0; padding: 10px; }
+.input-container { display: flex; gap: 8px; }
+.input-container input { flex: 1; padding: 10px; border-radius: 25px; border: none; }
+button { background: #128c7e; color: white; border: none; border-radius: 50%; width: 48px; font-size: 1.4rem; }
