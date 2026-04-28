@@ -74,3 +74,19 @@ document.getElementById('imageInput').onchange = async (e) => {
     const url = await uploadParaCloudinary(e.target.files[0]);
     await addDoc(mensagensCol, { nome: meuNome, tipo: "imagem", url, timestamp: Date.now() });
 };
+async function limparMensagensAntigas() {
+    const quinzeDiasAtras = Date.now() - (15 * 24 * 60 * 60 * 1000);
+    const q = query(mensagensCol, where("timestamp", "<", quinzeDiasAtras));
+    const snapshot = await getDocs(q);
+    snapshot.forEach(async (doc) => {
+        // Se tiver URL de imagem/áudio no Cloudinary, você pode deletar também
+        const dados = doc.data();
+        if (dados.url && dados.url.includes('cloudinary')) {
+            // Opcional: deletar do Cloudinary (precisa do public_id)
+        }
+        await deleteDoc(doc.ref);
+    });
+}
+
+// Chame antes de carregar as mensagens
+limparMensagensAntigas();
