@@ -2,31 +2,70 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyCommunity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MyCommunityForum - Discussões do Bairro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <div class="chat-area"></div>
-        <div class="footer-input">
-            <div class="input-container">
-                <input type="text" id="msgInput" placeholder="Escreva algo...">
-                <button id="sendBtn">📤</button>
-                <button id="voiceBtn">🎤</button>
-                <button id="cameraBtn">📷</button>
-                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+
+<!-- CABEÇALHO -->
+<header>
+    <div class="logo">🏘️ MYCOMMUNIYY</div>
+    <button class="btn-inscrever" id="inscreverBtn">Inscreva-se</button>
+</header>
+
+<!-- ABAS (ASSUNTOS) -->
+<nav class="tabs-container">
+    <ul class="tabs" id="tabsLista">
+        <li data-categoria="hipertensao">🩺 Hipertensão e diabetes</li>
+        <li data-categoria="praca">🏞️ Reforma da Praça</li>
+        <li data-categoria="buracos">🕳️ Buracos (Águas de Teresina)</li>
+        <li class="add-tab" id="novaCategoriaBtn">➕</li>
+    </ul>
+</nav>
+
+<!-- CONTEÚDO PRINCIPAL (70% POSTS / 30% SIDEBAR) -->
+<div class="main-container">
+    <!-- COLUNA ESQUERDA: POSTS -->
+    <main class="posts-area" id="postsArea">
+        <div class="posts-list" id="postsList">
+            <!-- Os posts serão inseridos aqui via JavaScript -->
+            <div class="loading">Carregando discussões...</div>
+        </div>
+        
+        <!-- INPUT FIXO PARA COMENTÁRIOS -->
+        <div class="input-fixo">
+            <div class="input-wrapper">
+                <textarea id="msgInput" rows="1" placeholder="Digite sua mensagem..."></textarea>
+                <div class="input-actions">
+                    <button id="anexarBtn" title="Anexar">📎</button>
+                    <button id="microfoneBtn" title="Gravar áudio">🎤</button>
+                    <button id="cameraBtn" title="Tirar foto">📷</button>
+                    <button id="enviarBtn" class="btn-enviar">Enviar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <script type="importmap">
-        {
-            "imports": {
-                "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
-                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
-            }
+    </main>
+
+    <!-- COLUNA DIREITA: ANÚNCIOS (ADSENSE) -->
+    <aside class="sidebar-ads" id="sidebarAds">
+        <div class="ad-placeholder">📢 Anúncio 1</div>
+        <div class="ad-placeholder">📢 Anúncio 2</div>
+        <div class="ad-placeholder">📢 Anúncio 3</div>
+        <div class="ad-placeholder">📢 Anúncio 4</div>
+    </aside>
+</div>
+
+<!-- Firebase SDK -->
+<script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
         }
-    </script>
-    <script type="module" src="script.js"></script>
+    }
+</script>
+
+<script type="module" src="script.js"></script>
 </body>
-</html> 
+</html>
