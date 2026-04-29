@@ -3,59 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>MyCommunityForum - Discussões do Bairro</title>
-    <link rel="stylesheet" href="style.css">
+    <title>MyCommunityForum - Regras & Discussões</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 16px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        /* Header */
+        .header {
+            background: #001f3f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 1.6rem; }
+        /* Regras */
+        .regras {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 12px;
+        }
+        .regras h3 { color: #856404; margin-bottom: 8px; }
+        .regras p { font-size: 0.85rem; color: #856404; }
+        /* Abas */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px;
+            overflow-x: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            white-space: nowrap;
+        }
+        .tab.active {
+            color: #0074D9;
+            border-bottom: 3px solid #0074D9;
+        }
+        /* Área de posts */
+        .posts-area {
+            padding: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .post {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #0074D9;
+        }
+        .post h4 { color: #001f3f; margin-bottom: 6px; }
+        .post small { color: #888; font-size: 11px; }
+        .post p { margin-top: 8px; color: #333; }
+        .comentarios {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #ddd;
+        }
+        .comentario {
+            background: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .ad {
+            background: #f1f1f1;
+            text-align: center;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 12px;
+            color: #999;
+            font-size: 12px;
+        }
+        /* Formulários */
+        .form-area {
+            padding: 16px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 24px;
+            font-family: inherit;
+        }
+        button {
+            background: #0074D9;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .erro {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .tab { padding: 8px 12px; font-size: 14px; }
+            .post h4 { font-size: 16px; }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h1>📌 MyCommunityForum</h1>
+        <p>Discussões organizadas do bairro</p>
+    </div>
 
-<!-- CABEÇALHO -->
-<header>
-    <div class="logo">🏘️ MYCOMMUNITY</div>
-    <button class="btn-inscrever" id="inscreverBtn">Inscreva-se</button>
-</header>
+    <div class="regras">
+        <h3>📜 Regras do Fórum</h3>
+        <p>✅ Comentários devem ter <strong>NO MÍNIMO 200 CARACTERES</strong> (espaços contam).</p>
+        <p>✅ Seja respeitoso. Nada de xingamentos, política ou fake news.</p>
+        <p>✅ Mantenha o foco no assunto da categoria.</p>
+        <p>✅ Publicações fora das regras serão removidas.</p>
+    </div>
 
-<!-- ABAS (ASSUNTOS) -->
-<nav class="tabs-container">
-    <ul class="tabs" id="tabsLista">
-        <li data-categoria="hipertensao" class="active">🩺 Hipertensão e diabetes</li>
-        <li data-categoria="praca">🏞️ Reforma da Praça</li>
-        <li data-categoria="buracos">🕳️ Buracos (Águas de Teresina)</li>
-        <li class="add-tab" id="novaCategoriaBtn">➕</li>
-    </ul>
-</nav>
+    <div class="tabs" id="tabs">
+        <div class="tab active" data-cat="hipertensao">🩺 Hipertensão e Diabetes</div>
+        <div class="tab" data-cat="praca">🏞️ Reforma da Praça</div>
+        <div class="tab" data-cat="buracos">🕳️ Buracos (Águas de Teresina)</div>
+    </div>
 
-<!-- CONTEÚDO PRINCIPAL (70% POSTS / 30% SIDEBAR) -->
-<div class="main-container">
-    <!-- COLUNA ESQUERDA: POSTS -->
-    <main class="posts-area">
-        <div class="posts-list" id="postsList">
-            <!-- Os posts serão inseridos aqui via JavaScript -->
-        </div>
-        
-        <!-- INPUT FIXO PARA COMENTÁRIOS -->
-        <div class="input-fixo">
-            <div class="input-wrapper">
-                <textarea id="msgInput" rows="1" placeholder="Digite sua mensagem..."></textarea>
-                <div class="input-actions">
-                    <button id="anexarBtn" title="Anexar">📎</button>
-                    <button id="microfoneBtn" title="Gravar áudio">🎤</button>
-                    <button id="cameraBtn" title="Tirar foto">📷</button>
-                    <button id="enviarBtn" class="btn-enviar">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </main>
+    <div class="posts-area" id="postsArea">
+        <div style="text-align:center; padding:20px;">Carregando discussões...</div>
+    </div>
 
-    <!-- COLUNA DIREITA: ANÚNCIOS (ADSENSE) -->
-    <aside class="sidebar-ads">
-        <div class="ad-placeholder">📢 Anúncio 1 (AdSense)</div>
-        <div class="ad-placeholder">📢 Anúncio 2 (AdSense)</div>
-        <div class="ad-placeholder">📢 Anúncio 3 (AdSense)</div>
-        <div class="ad-placeholder">📢 Anúncio 4 (AdSense)</div>
-    </aside>
+    <div class="form-area">
+        <h3>➕ Novo tópico</h3>
+        <input type="text" id="titulo" placeholder="Título do tópico">
+        <textarea id="textoTopico" rows="3" placeholder="Escreva aqui o conteúdo do tópico..."></textarea>
+        <button id="btnCriarTopico">Criar tópico</button>
+        <div id="erroTopico" class="erro"></div>
+
+        <hr style="margin: 16px 0;">
+
+        <h3>💬 Responder ao tópico atual</h3>
+        <textarea id="respostaTexto" rows="3" placeholder="Digite sua resposta (mínimo 200 caracteres)..."></textarea>
+        <button id="btnResponder">Responder</button>
+        <div id="erroResposta" class="erro"></div>
+    </div>
 </div>
 
-<!-- Firebase SDK -->
 <script type="importmap">
     {
         "imports": {
@@ -65,6 +178,157 @@
     }
 </script>
 
-<script type="module" src="script.js"></script>
+<script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getDatabase, ref, push, onChildAdded, query, limitToLast, orderByChild } from "firebase/database";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB0sNCqeITOja_2WmtJi-exUMRMtdVdgQk",
+        authDomain: "mycommunityforum-3912a.firebaseapp.com",
+        databaseURL: "https://mycommunityforum-3912a-default-rtdb.firebaseio.com",
+        projectId: "mycommunityforum-3912a",
+        storageBucket: "mycommunityforum-3912a.firebasestorage.app",
+        messagingSenderId: "815011709524",
+        appId: "1:815011709524:web:93aed4d972d2ad90a5a3c1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const topicosRef = ref(db, "topicos");
+    const respostasRef = ref(db, "respostas");
+
+    let usuario = localStorage.getItem("forum_user");
+    if (!usuario) {
+        usuario = prompt("Digite seu nome:");
+        if (usuario) localStorage.setItem("forum_user", usuario);
+        else usuario = "Anônimo";
+    }
+
+    let categoriaAtual = "hipertensao";
+    let topicoAtualId = null;
+    const postsArea = document.getElementById("postsArea");
+    const tabs = document.querySelectorAll(".tab");
+    const btnCriarTopico = document.getElementById("btnCriarTopico");
+    const btnResponder = document.getElementById("btnResponder");
+
+    function mostrarErro(elementoId, mensagem) {
+        document.getElementById(elementoId).innerText = mensagem;
+        setTimeout(() => document.getElementById(elementoId).innerText = "", 3000);
+    }
+
+    function validar200caracteres(texto) {
+        return texto.trim().length >= 200;
+    }
+
+    async function criarTopico() {
+        const titulo = document.getElementById("titulo").value.trim();
+        const texto = document.getElementById("textoTopico").value.trim();
+        if (!titulo || !texto) {
+            mostrarErro("erroTopico", "Preencha título e conteúdo.");
+            return;
+        }
+        try {
+            await push(topicosRef, {
+                titulo: titulo,
+                texto: texto,
+                autor: usuario,
+                categoria: categoriaAtual,
+                timestamp: Date.now()
+            });
+            document.getElementById("titulo").value = "";
+            document.getElementById("textoTopico").value = "";
+            alert("Tópico criado com sucesso!");
+        } catch (error) {
+            mostrarErro("erroTopico", "Erro ao criar: " + error.message);
+        }
+    }
+
+    async function responderTopico() {
+        if (!topicoAtualId) {
+            alert("Selecione um tópico antes de responder.");
+            return;
+        }
+        const texto = document.getElementById("respostaTexto").value.trim();
+        if (!validar200caracteres(texto)) {
+            mostrarErro("erroResposta", "A resposta precisa ter no mínimo 200 caracteres (incluindo espaços).");
+            return;
+        }
+        try {
+            await push(respostasRef, {
+                topicoId: topicoAtualId,
+                autor: usuario,
+                texto: texto,
+                timestamp: Date.now()
+            });
+            document.getElementById("respostaTexto").value = "";
+            alert("Resposta enviada!");
+        } catch (error) {
+            mostrarErro("erroResposta", "Erro ao responder: " + error.message);
+        }
+    }
+
+    function exibirTopicos() {
+        postsArea.innerHTML = "<div style='text-align:center; padding:20px;'>Carregando tópicos...</div>";
+        const topicosQuery = query(topicosRef, orderByChild("timestamp"), limitToLast(50));
+        onChildAdded(topicosQuery, (snapshot) => {
+            const topico = snapshot.val();
+            if (topico.categoria !== categoriaAtual) return;
+            const topicoDiv = document.createElement("div");
+            topicoDiv.className = "post";
+            topicoDiv.style.cursor = "pointer";
+            topicoDiv.innerHTML = `
+                <h4>📌 ${topico.titulo}</h4>
+                <small>por ${topico.autor} • ${new Date(topico.timestamp).toLocaleString()}</small>
+                <p>${topico.texto.substring(0, 150)}...</p>
+                <div class="comentarios" id="comentarios-${snapshot.key}"></div>
+            `;
+            topicoDiv.onclick = () => {
+                topicoAtualId = snapshot.key;
+                carregarRespostas(snapshot.key);
+                document.querySelectorAll(".post").forEach(p => p.style.borderLeft = "4px solid #0074D9");
+                topicoDiv.style.borderLeft = "4px solid #2ecc71";
+            };
+            postsArea.appendChild(topicoDiv);
+            
+            // Anúncio a cada 3 tópicos
+            if (postsArea.children.length % 3 === 0) {
+                const adDiv = document.createElement("div");
+                adDiv.className = "ad";
+                adDiv.innerHTML = "📢 Espaço para anúncio (AdSense)";
+                postsArea.appendChild(adDiv);
+            }
+        });
+    }
+
+    function carregarRespostas(topicoId) {
+        const respostasQuery = query(respostasRef, orderByChild("timestamp"), limitToLast(50));
+        onChildAdded(respostasQuery, (snapshot) => {
+            const resposta = snapshot.val();
+            if (resposta.topicoId !== topicoId) return;
+            const comentariosDiv = document.getElementById(`comentarios-${topicoId}`);
+            if (comentariosDiv) {
+                const respDiv = document.createElement("div");
+                respDiv.className = "comentario";
+                respDiv.innerHTML = `<strong>${resposta.autor}</strong><br>${resposta.texto}<br><small>${new Date(resposta.timestamp).toLocaleString()}</small>`;
+                comentariosDiv.appendChild(respDiv);
+            }
+        });
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            categoriaAtual = tab.getAttribute("data-cat");
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            postsArea.innerHTML = "";
+            exibirTopicos();
+        });
+    });
+
+    btnCriarTopico.addEventListener("click", criarTopico);
+    btnResponder.addEventListener("click", responderTopico);
+
+    exibirTopicos();
+</script>
 </body>
 </html>
