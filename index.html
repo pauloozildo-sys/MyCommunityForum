@@ -3,119 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>MyCommunityForum - Bairro em Debate</title>
+    <title>MyCommunityForum • Dark Mode</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background: #eef2f5;
+            background-color: #121212;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
             padding: 20px;
+            color: #e0e0e0;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        /* Header */
+        .forum-container { max-width: 1000px; margin: 0 auto; }
         .header {
-            background: #0a2b3e;
-            color: white;
-            padding: 24px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 28px;
+            margin-bottom: 24px;
             text-align: center;
         }
-        .header h1 { font-size: 1.8rem; }
-        .header p { opacity: 0.8; }
-        /* Regras */
-        .rules {
-            background: #fff4e5;
-            border-left: 6px solid #ff9800;
-            margin: 20px;
-            padding: 15px;
-            border-radius: 20px;
-        }
-        .rules h3 { color: #e65100; margin-bottom: 8px; }
-        .rules p { font-size: 0.85rem; color: #5d3a00; }
-        /* Abas */
+        .header h1 { color: #1E88E5; }
         .tabs {
             display: flex;
-            gap: 5px;
-            padding: 0 20px;
-            border-bottom: 1px solid #ddd;
+            gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 24px;
         }
         .tab {
-            padding: 12px 20px;
+            background: #1e1e1e;
+            padding: 8px 18px;
+            border-radius: 40px;
             cursor: pointer;
             font-weight: bold;
-            color: #2c3e50;
-            border-radius: 30px 30px 0 0;
+            color: #ccc;
         }
-        .tab.active {
-            background: #0074D9;
+        .tab.active { background: #1E88E5; color: white; }
+        .topico-card {
+            background: #1B1B1B;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            border: 1px solid #2a2a2a;
+        }
+        .post-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 16px;
+            padding: 20px;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: #1E88E5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 8px auto;
             color: white;
         }
-        /* Grid principal */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 24px;
-            padding: 24px;
-        }
-        /* Lista de tópicos */
-        .topicos-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .topico-card {
-            background: #f9fafb;
-            border-radius: 24px;
-            padding: 18px;
-            border: 1px solid #e2e8f0;
-            transition: 0.2s;
+        .autor-nome { font-weight: bold; text-align: center; }
+        .autor-status { font-size: 0.7rem; color: #aaa; text-align: center; }
+        .post-titulo { font-size: 1.2rem; font-weight: bold; margin-bottom: 8px; color: #fff; }
+        .post-meta { font-size: 0.7rem; color: #aaa; margin-bottom: 12px; }
+        .post-texto { color: #ddd; line-height: 1.5; margin-bottom: 12px; }
+        .btn-resposta {
+            background: transparent;
+            border: 1px solid #1E88E5;
+            color: #1E88E5;
+            padding: 6px 14px;
+            border-radius: 40px;
             cursor: pointer;
+            font-size: 0.75rem;
         }
-        .topico-card:hover { background: #f1f5f9; }
-        .topico-titulo { font-size: 1.2rem; font-weight: bold; color: #0a2b3e; margin-bottom: 6px; }
-        .topico-meta { font-size: 0.75rem; color: #5b6e8c; margin-bottom: 12px; }
-        .topico-resumo { color: #334155; font-size: 0.9rem; }
-        .topico-stats { margin-top: 10px; font-size: 0.7rem; color: #0074D9; }
-        /* Sidebar */
-        .sidebar {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid #e2e8f0;
-        }
-        .sidebar h3 { font-size: 1.2rem; margin-bottom: 15px; }
-        .stat { margin-bottom: 12px; font-size: 0.9rem; }
-        .btn-criar {
-            background: #0074D9;
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1E88E5;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 40px;
-            width: 100%;
-            font-weight: bold;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            font-size: 28px;
             cursor: pointer;
-            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
         }
-        /* Modal (criar tópico / responder) */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1001;
         }
         .modal-content {
-            background: white;
+            background: #1e1e1e;
             max-width: 600px;
             width: 90%;
             border-radius: 32px;
@@ -124,107 +109,87 @@
         input, textarea {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 24px;
-            font-family: inherit;
+            margin: 8px 0;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 20px;
+            color: white;
         }
         button {
-            background: #0074D9;
-            color: white;
+            background: #1E88E5;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 40px;
+            color: white;
             cursor: pointer;
         }
-        .erro { color: #dc3545; font-size: 12px; margin-top: 4px; }
-        @media (max-width: 800px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .sidebar { order: 2; }
+        @media (max-width: 640px) {
+            .post-grid { grid-template-columns: 1fr; gap: 8px; }
+            .profile-col { text-align: left; display: flex; gap: 12px; align-items: center; }
+            .avatar { width: 48px; height: 48px; font-size: 1.2rem; margin: 0; }
+            .autor-nome, .autor-status { text-align: left; }
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="forum-container">
     <div class="header">
         <h1>📌 MyCommunityForum</h1>
-        <p>Discussões sérias do bairro</p>
-    </div>
-    <div class="rules">
-        <h3>📜 Regras: respostas e tópicos com MÍNIMO DE 200 CARACTERES</h3>
-        <p>✅ Vídeos e posts do YouTube, TikTok, Instagram podem ser colados como link – eles aparecem embutidos.</p>
-        <p>✅ Sem ofensas, sem política, foco nos temas do bairro.</p>
+        <p>Discussões • Dark Mode • Mídia externa</p>
     </div>
     <div class="tabs" id="tabs">
         <div class="tab active" data-cat="hipertensao">🩺 Hipertensão e Diabetes</div>
         <div class="tab" data-cat="praca">🏞️ Reforma da Praça</div>
         <div class="tab" data-cat="buracos">🕳️ Buracos (Águas de Teresina)</div>
     </div>
-    <div class="main-grid">
-        <div class="topicos-list" id="topicosList">
-            <div style="text-align:center; padding:40px;">Carregando tópicos...</div>
-        </div>
-        <div class="sidebar" id="sidebar">
-            <h3>📊 Estatísticas</h3>
-            <div id="stats">Carregando...</div>
-            <button class="btn-criar" id="criarTopicoBtn">➕ Criar novo tópico</button>
-        </div>
-    </div>
+    <div id="topicosContainer"></div>
 </div>
+<button class="fab" id="fabBtn">+</button>
 
 <!-- Modal Criar Tópico -->
 <div id="modalTopico" class="modal">
     <div class="modal-content">
         <h3>➕ Novo tópico</h3>
         <input type="text" id="topicoTitulo" placeholder="Título">
-        <textarea id="topicoTexto" rows="5" placeholder="Conteúdo do tópico (mínimo 200 caracteres). Cole links do YouTube, TikTok ou Instagram que eles viram vídeos!"></textarea>
-        <div id="erroTopico" class="erro"></div>
-        <button id="salvarTopicoBtn">Publicar tópico</button>
-        <button id="fecharTopicoBtn" style="background:#ccc;">Cancelar</button>
+        <textarea id="topicoTexto" rows="4" placeholder="Conteúdo. Cole links do YouTube, TikTok, Instagram."></textarea>
+        <button id="salvarTopico">Publicar</button>
+        <button id="fecharTopico" style="background:#444;">Cancelar</button>
     </div>
 </div>
 
 <!-- Modal Responder -->
 <div id="modalResposta" class="modal">
     <div class="modal-content">
-        <h3>💬 Responder ao tópico</h3>
-        <textarea id="respostaTexto" rows="5" placeholder="Sua resposta (mínimo 200 caracteres). Links de redes sociais aparecem como mídia."></textarea>
-        <div id="erroResposta" class="erro"></div>
-        <button id="salvarRespostaBtn">Enviar resposta</button>
-        <button id="fecharRespostaBtn" style="background:#ccc;">Cancelar</button>
+        <h3>💬 Responder</h3>
+        <textarea id="respostaTexto" rows="4" placeholder="Sua resposta..."></textarea>
+        <button id="salvarResposta">Enviar</button>
+        <button id="fecharResposta" style="background:#444;">Cancelar</button>
     </div>
 </div>
 
-<script type="importmap">
-    {
-        "imports": {
-            "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
-            "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
-        }
-    }
-</script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-<script type="module">
-    import { initializeApp } from "firebase/app";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, getDocs, doc, getDoc, updateDoc, increment, where } from "firebase/firestore";
-
+<script>
+    // Firebase config (Realtime Database)
     const firebaseConfig = {
         apiKey: "AIzaSyB0sNCqeITOja_2WmtJi-exUMRMtdVdgQk",
         authDomain: "mycommunityforum-3912a.firebaseapp.com",
+        databaseURL: "https://mycommunityforum-3912a-default-rtdb.firebaseio.com",
         projectId: "mycommunityforum-3912a",
         storageBucket: "mycommunityforum-3912a.firebasestorage.app",
         messagingSenderId: "815011709524",
         appId: "1:815011709524:web:93aed4d972d2ad90a5a3c1"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const topicosRef = collection(db, "topicos");
-    const respostasRef = collection(db, "respostas");
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const topicosRef = database.ref("topicos");
+    const respostasRef = database.ref("respostas");
 
     let usuario = localStorage.getItem("forum_user");
     if (!usuario) {
-        usuario = prompt("Digite seu nome para participar:");
+        usuario = prompt("Digite seu nome:");
         if (usuario) localStorage.setItem("forum_user", usuario);
         else usuario = "Anônimo";
     }
@@ -232,137 +197,92 @@
     let categoriaAtual = "hipertensao";
     let topicoAtualId = null;
 
-    // Utilities
     function embedMedia(texto) {
-        // YouTube
-        let novoTexto = texto.replace(/(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/g, (match, p1, p2, p3, id) => {
+        let novo = texto.replace(/(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/g, (m, p1, p2, p3, id) => {
             return `<iframe width="100%" height="200" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen style="border-radius:16px; margin:8px 0;"></iframe>`;
         });
-        // TikTok
-        novoTexto = novoTexto.replace(/(https?:\/\/)?(www\.)?(tiktok\.com\/@[\w]+\/video\/\d+)/g, (match) => {
-            return `<blockquote class="tiktok-embed" cite="${match}" data-video-id="${match.split('/').pop()}" style="max-width:100%;"><section><a target="_blank" href="${match}">Ver no TikTok</a></section></blockquote><script async src="https://www.tiktok.com/embed.js"></script>`;
+        novo = novo.replace(/(https?:\/\/)?(www\.)?(tiktok\.com\/@[\w]+\/video\/\d+)/g, (match) => {
+            return `<blockquote class="tiktok-embed" cite="${match}" style="max-width:100%;"><a href="${match}">Ver no TikTok</a></blockquote><script async src="https://www.tiktok.com/embed.js"></script>`;
         });
-        // Instagram
-        novoTexto = novoTexto.replace(/(https?:\/\/)?(www\.)?(instagram\.com\/p\/[a-zA-Z0-9_-]+)/g, (match) => {
-            return `<blockquote class="instagram-media" data-instgrm-permalink="${match}" style="max-width:100%; margin:8px 0;"></blockquote><script async src="https://www.instagram.com/embed.js"></script>`;
+        novo = novo.replace(/(https?:\/\/)?(www\.)?(instagram\.com\/p\/[a-zA-Z0-9_-]+)/g, (match) => {
+            return `<blockquote class="instagram-media" data-instgrm-permalink="${match}" style="max-width:100%;"></blockquote><script async src="https://www.instagram.com/embed.js"></script>`;
         });
-        return novoTexto;
-    }
-
-    function validar200caracteres(texto) {
-        return texto.trim().length >= 200;
+        return novo;
     }
 
     async function carregarTopicos() {
-        const q = query(topicosRef, where("categoria", "==", categoriaAtual), orderBy("timestamp", "desc"), limit(30));
-        const snapshot = await getDocs(q);
-        const lista = document.getElementById("topicosList");
-        lista.innerHTML = "";
-        for (const docSnap of snapshot.docs) {
-            const topico = docSnap.data();
-            const respostasQuery = query(respostasRef, where("topicoId", "==", docSnap.id));
-            const respSnap = await getDocs(respostasQuery);
-            const totalRespostas = respSnap.size;
+        const snapshot = await topicosRef.orderByChild("timestamp").once("value");
+        const topicos = [];
+        snapshot.forEach(child => {
+            const topico = child.val();
+            if (topico.categoria === categoriaAtual) {
+                topicos.push({ id: child.key, ...topico });
+            }
+        });
+        topicos.reverse(); // mais recentes primeiro
+        const container = document.getElementById("topicosContainer");
+        container.innerHTML = "";
+        for (const topico of topicos) {
+            const respostasSnapshot = await respostasRef.orderByChild("topicoId").equalTo(topico.id).once("value");
+            const totalRespostas = respostasSnapshot.size;
             const card = document.createElement("div");
             card.className = "topico-card";
             card.innerHTML = `
-                <div class="topico-titulo">📌 ${topico.titulo}</div>
-                <div class="topico-meta">por ${topico.autor} • ${new Date(topico.timestamp.toDate()).toLocaleString()}</div>
-                <div class="topico-resumo">${topico.texto.substring(0, 120)}...</div>
-                <div class="topico-stats">💬 ${totalRespostas} respostas</div>
+                <div class="post-grid">
+                    <div class="profile-col">
+                        <div class="avatar">${topico.autor.charAt(0)}</div>
+                        <div class="autor-nome">${topico.autor}</div>
+                        <div class="autor-status">Morador</div>
+                    </div>
+                    <div class="content-col">
+                        <div class="post-titulo">${topico.titulo}</div>
+                        <div class="post-meta">📅 ${new Date(topico.timestamp).toLocaleString()}</div>
+                        <div class="post-texto">${embedMedia(topico.texto.substring(0, 200))}...</div>
+                        <button class="btn-resposta" data-id="${topico.id}">💬 Responder (${totalRespostas})</button>
+                    </div>
+                </div>
             `;
-            card.onclick = () => abrirTopico(docSnap.id);
-            lista.appendChild(card);
+            container.appendChild(card);
         }
-        // Estatísticas
-        const totalTopicos = snapshot.size;
-        const lastTopicsSnap = await getDocs(query(topicosRef, orderBy("timestamp", "desc"), limit(1)));
-        const ultimoTopico = lastTopicsSnap.docs[0]?.data().titulo || "Nenhum";
-        document.getElementById("stats").innerHTML = `
-            <div class="stat">📋 Total tópicos: ${totalTopicos}</div>
-            <div class="stat">🕒 Último tópico: ${ultimoTopico}</div>
-        `;
-    }
-
-    async function abrirTopico(topicoId) {
-        const docRef = doc(db, "topicos", topicoId);
-        const docSnap = await getDoc(docRef);
-        if (!docSnap.exists()) return;
-        const topico = docSnap.data();
-        const respostasQuery = query(respostasRef, where("topicoId", "==", topicoId), orderBy("timestamp", "asc"));
-        const respSnap = await getDocs(respostasQuery);
-        let respostasHtml = "";
-        respSnap.forEach(r => {
-            const resp = r.data();
-            respostasHtml += `<div style="background:#f1f5f9; border-radius:20px; padding:12px; margin-bottom:12px;">
-                                <strong>${resp.autor}</strong> • ${new Date(resp.timestamp.toDate()).toLocaleString()}<br>
-                                <div>${embedMedia(resp.texto)}</div>
-                             </div>`;
+        document.querySelectorAll(".btn-resposta").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                topicoAtualId = btn.getAttribute("data-id");
+                document.getElementById("modalResposta").style.display = "flex";
+            });
         });
-        const modal = document.createElement("div");
-        modal.className = "modal";
-        modal.style.display = "flex";
-        modal.innerHTML = `
-            <div class="modal-content" style="max-width:700px; max-height:80vh; overflow-y:auto;">
-                <h3>📌 ${topico.titulo}</h3>
-                <p><small>por ${topico.autor} • ${new Date(topico.timestamp.toDate()).toLocaleString()}</small></p>
-                <div>${embedMedia(topico.texto)}</div>
-                <hr style="margin:16px 0;">
-                <h4>💬 Respostas (${respSnap.size})</h4>
-                <div id="respostasContainer">${respostasHtml}</div>
-                <button id="responderModalBtn" style="margin:12px 0;">➕ Responder a este tópico</button>
-                <button id="fecharModalBtn" style="background:#ccc;">Fechar</button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-        document.getElementById("responderModalBtn").onclick = () => {
-            topicoAtualId = topicoId;
-            document.getElementById("modalResposta").style.display = "flex";
-            modal.remove();
-        };
-        document.getElementById("fecharModalBtn").onclick = () => modal.remove();
     }
 
     async function criarTopico() {
         const titulo = document.getElementById("topicoTitulo").value.trim();
         const texto = document.getElementById("topicoTexto").value.trim();
-        if (!titulo || !validar200caracteres(texto)) {
-            document.getElementById("erroTopico").innerText = "Título obrigatório e conteúdo com mínimo 200 caracteres.";
-            return;
-        }
-        try {
-            await addDoc(topicosRef, {
-                titulo: titulo,
-                texto: texto,
-                autor: usuario,
-                categoria: categoriaAtual,
-                timestamp: new Date()
-            });
-            alert("Tópico criado!");
-            document.getElementById("modalTopico").style.display = "none";
-            carregarTopicos();
-        } catch(e) { alert("Erro: "+e.message); }
+        if (!titulo || !texto) return alert("Preencha título e conteúdo.");
+        const novoTopicoRef = topicosRef.push();
+        await novoTopicoRef.set({
+            titulo: titulo,
+            texto: texto,
+            autor: usuario,
+            categoria: categoriaAtual,
+            timestamp: Date.now()
+        });
+        alert("Tópico criado!");
+        document.getElementById("modalTopico").style.display = "none";
+        carregarTopicos();
     }
 
     async function responderTopico() {
         if (!topicoAtualId) return;
         const texto = document.getElementById("respostaTexto").value.trim();
-        if (!validar200caracteres(texto)) {
-            document.getElementById("erroResposta").innerText = "A resposta precisa ter no mínimo 200 caracteres.";
-            return;
-        }
-        try {
-            await addDoc(respostasRef, {
-                topicoId: topicoAtualId,
-                autor: usuario,
-                texto: texto,
-                timestamp: new Date()
-            });
-            await updateDoc(doc(db, "topicos", topicoAtualId), { respostasCount: increment(1) });
-            alert("Resposta adicionada!");
-            document.getElementById("modalResposta").style.display = "none";
-            if (topicoAtualId) abrirTopico(topicoAtualId);
-        } catch(e) { alert("Erro: "+e.message); }
+        if (!texto) return alert("Digite uma resposta.");
+        const novaRespostaRef = respostasRef.push();
+        await novaRespostaRef.set({
+            topicoId: topicoAtualId,
+            texto: texto,
+            autor: usuario,
+            timestamp: Date.now()
+        });
+        alert("Resposta enviada!");
+        document.getElementById("modalResposta").style.display = "none";
+        carregarTopicos();
     }
 
     document.querySelectorAll(".tab").forEach(tab => {
@@ -373,12 +293,11 @@
             carregarTopicos();
         });
     });
-
-    document.getElementById("criarTopicoBtn").onclick = () => document.getElementById("modalTopico").style.display = "flex";
-    document.getElementById("fecharTopicoBtn").onclick = () => document.getElementById("modalTopico").style.display = "none";
-    document.getElementById("fecharRespostaBtn").onclick = () => document.getElementById("modalResposta").style.display = "none";
-    document.getElementById("salvarTopicoBtn").onclick = criarTopico;
-    document.getElementById("salvarRespostaBtn").onclick = responderTopico;
+    document.getElementById("fabBtn").onclick = () => document.getElementById("modalTopico").style.display = "flex";
+    document.getElementById("fecharTopico").onclick = () => document.getElementById("modalTopico").style.display = "none";
+    document.getElementById("fecharResposta").onclick = () => document.getElementById("modalResposta").style.display = "none";
+    document.getElementById("salvarTopico").onclick = criarTopico;
+    document.getElementById("salvarResposta").onclick = responderTopico;
 
     carregarTopicos();
 </script>
