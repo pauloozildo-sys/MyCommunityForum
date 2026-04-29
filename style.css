@@ -41,11 +41,6 @@ header {
     transition: 0.2s;
 }
 
-.btn-inscrever:hover {
-    background: #e0e0e0;
-    transform: scale(1.02);
-}
-
 /* ========== ABAS (HORIZONTAIS, COM SCROLL NO CELULAR) ========== */
 .tabs-container {
     background: white;
@@ -93,7 +88,6 @@ header {
     padding: 20px;
 }
 
-/* Coluna de posts (70%) */
 .posts-area {
     flex: 7;
     display: flex;
@@ -102,7 +96,6 @@ header {
     border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     overflow: hidden;
-    position: relative;
 }
 
 .posts-list {
@@ -114,7 +107,6 @@ header {
     gap: 16px;
 }
 
-/* Cada post (estilo balão) */
 .post {
     background: white;
     border-radius: 20px;
@@ -126,7 +118,6 @@ header {
     border-left: 4px solid transparent;
 }
 
-/* ACS verificado */
 .post.acs-verified {
     border-left: 4px solid #2ecc71;
     background: #f9fff9;
@@ -144,10 +135,6 @@ header {
     font-weight: bold;
     font-size: 1.2rem;
     flex-shrink: 0;
-}
-
-.post-content {
-    flex: 1;
 }
 
 .post-header {
@@ -177,7 +164,6 @@ header {
     word-break: break-word;
 }
 
-/* Espaço para anúncio entre posts */
 .ad-insert {
     background: #f8f8f8;
     border: 1px dashed #ccc;
@@ -189,7 +175,7 @@ header {
     margin: 12px 0;
 }
 
-/* Input fixo na parte inferior */
+/* Input fixo */
 .input-fixo {
     border-top: 1px solid #eee;
     background: white;
@@ -225,7 +211,6 @@ textarea {
     cursor: pointer;
     padding: 6px;
     border-radius: 50%;
-    transition: 0.2s;
 }
 
 .btn-enviar {
@@ -236,7 +221,7 @@ textarea {
     font-size: 0.9rem !important;
 }
 
-/* Sidebar de anúncios (30%) */
+/* Sidebar anúncios */
 .sidebar-ads {
     flex: 3;
     background: white;
@@ -257,41 +242,26 @@ textarea {
     color: #aaa;
 }
 
-/* ========== RESPONSIVO (CELULAR) ========== */
+/* Responsivo */
 @media (max-width: 768px) {
     .main-container {
         flex-direction: column;
         padding: 10px;
         gap: 16px;
     }
-    
     .sidebar-ads {
-        flex: auto;
         order: 2;
     }
-    
     .posts-area {
         order: 1;
     }
-    
     .tabs li {
         padding: 6px 14px;
         font-size: 0.8rem;
     }
-    
     .logo {
         font-size: 1.2rem;
     }
-    
-    .btn-inscrever {
-        padding: 5px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .post {
-        gap: 8px;
-    }
-    
     .avatar {
         width: 36px;
         height: 36px;
